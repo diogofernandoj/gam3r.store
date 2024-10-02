@@ -4,25 +4,25 @@ import { Product } from '@gstore/core';
 
 @Controller('products')
 export class ProductController {
-  constructor(private readonly repo: ProductPrisma) {}
+  constructor(private readonly repository: ProductPrisma) {}
 
   @Post()
   saveProduct(@Body() product: Product): Promise<void> {
-    return this.repo.save(product);
+    return this.repository.saveProductRepository(product);
   }
 
   @Get()
   getProducts(): Promise<Product[]> {
-    return this.repo.get();
+    return this.repository.getProductsRepository();
   }
 
   @Get(':id')
   getProduct(@Param('id') id: string): Promise<Product> {
-    return this.repo.getById(+id);
+    return this.repository.getProductByIdRepository(+id);
   }
 
   @Delete(':id')
   deleteProduct(@Param('id') id: string): Promise<void> {
-    return this.repo.remove(+id);
+    return this.repository.deleteProductRepository(+id);
   }
 }

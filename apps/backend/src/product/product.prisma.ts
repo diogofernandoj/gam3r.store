@@ -6,7 +6,7 @@ import { PrismaProvider } from 'src/db/prisma.provider';
 export class ProductPrisma {
   constructor(readonly prisma: PrismaProvider) {}
 
-  async save(product: Product): Promise<void> {
+  async saveProductRepository(product: Product): Promise<void> {
     await this.prisma.product.upsert({
       where: { id: product.id ?? -1 },
       update: product,
@@ -14,17 +14,17 @@ export class ProductPrisma {
     });
   }
 
-  async get(): Promise<Product[]> {
+  async getProductsRepository(): Promise<Product[]> {
     const products = await this.prisma.product.findMany();
     return products as Product[];
   }
 
-  async getById(id: number): Promise<Product | null> {
+  async getProductByIdRepository(id: number): Promise<Product | null> {
     const product = await this.prisma.product.findUnique({ where: { id } });
     return (product as Product) ?? null;
   }
 
-  async remove(id: number): Promise<void> {
+  async deleteProductRepository(id: number): Promise<void> {
     await this.prisma.product.delete({ where: { id } });
   }
 }
