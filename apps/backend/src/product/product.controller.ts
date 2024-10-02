@@ -7,22 +7,22 @@ export class ProductController {
   constructor(private readonly repo: ProductPrisma) {}
 
   @Post()
-  salvarProduct(@Body() product: Product): Promise<void> {
-    return this.repo.salvar(product);
+  saveProduct(@Body() product: Product): Promise<void> {
+    return this.repo.save(product);
   }
 
   @Get()
-  obterProducts(): Promise<Product[]> {
-    return this.repo.obter();
+  getProducts(): Promise<Product[]> {
+    return this.repo.get();
   }
 
   @Get(':id')
-  obterProduct(@Param('id') id: string): Promise<Product> {
-    return this.repo.obterPorId(+id);
+  getProduct(@Param('id') id: string): Promise<Product> {
+    return this.repo.getById(+id);
   }
 
   @Delete(':id')
-  excluirProduct(@Param('id') id: string): Promise<void> {
-    return this.repo.excluir(+id);
+  deleteProduct(@Param('id') id: string): Promise<void> {
+    return this.repo.remove(+id);
   }
 }
