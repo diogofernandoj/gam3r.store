@@ -38,7 +38,7 @@ model Order {
   status         String
   payment_method String
 
-  delivery    OrderDelivery @relation(fields: [delivery_id], references: [id])
+  delivery    DeliveryOrder @relation(fields: [delivery_id], references: [id])
   delivery_id Int           @unique
 
   items OrderItem[]
@@ -56,13 +56,13 @@ model OrderItem {
   product_id Int
 }
 
-model OrderDelivery {
+model DeliveryOrder {
   id             Int    @id @default(autoincrement())
   name           String
   email          String
   document       String
   street_address String
-  complemento    String
+  complement     String
   city           String
   state          String
 
